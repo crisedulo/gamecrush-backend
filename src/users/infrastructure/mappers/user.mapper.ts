@@ -1,5 +1,6 @@
 import { UserEntity } from '../../domain/entities/user.entity';
 import { UserDocument } from '../database/schemas/user.schema';
+import { GameEntity } from '../../../games/domain/entities/game.entity';
 
 export class UserMapper {
   static toEntity(doc: UserDocument): UserEntity {
@@ -8,7 +9,9 @@ export class UserMapper {
       doc.gamerTag,
       doc.email,
       doc.password,
-      doc.favoriteGames.map((id) => id.toString()),
+      (doc.favoriteGames as any[]).map((g: any) =>
+        typeof g === 'string' ? g : g._id ? g._id.toString() : g.toString(),
+      ),
       doc.platforms,
       doc.genres,
       doc.country,
@@ -24,7 +27,10 @@ export class UserMapper {
       gamerTag: entity.gamerTag,
       email: entity.email,
       password: entity.password,
-      favoriteGames: entity.favoriteGames ?? [],
+      favoriteGames:
+        (entity.favoriteGames as (string | GameEntity)[])?.map((g) =>
+          typeof g === 'string' ? g : g.id,
+        ) ?? [],
       platforms: entity.platforms ?? [],
       genres: entity.genres ?? [],
       country: entity.country ?? '',

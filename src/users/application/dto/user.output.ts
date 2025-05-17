@@ -8,7 +8,9 @@ export class UserOutput {
   @Field() gamerTag: string;
   @Field() email: string;
 
-  @Field(() => [String]) favoriteGames: string[];
+  @Field(() => [String])
+  favoriteGames: string[];
+
   @Field(() => [String]) platforms: string[];
   @Field(() => [String]) genres: string[];
 
@@ -16,5 +18,6 @@ export class UserOutput {
   @Field() available: boolean;
   @Field() hasMic: boolean;
   @Field() showGamerTag: boolean;
+
   @Field(() => [String]) photos: string[];
 }

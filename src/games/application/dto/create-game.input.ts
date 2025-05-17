@@ -1,4 +1,3 @@
-// src/games/application/dto/create-game.input.ts
 import { InputType, Field, Int } from '@nestjs/graphql';
 import {
   IsString,

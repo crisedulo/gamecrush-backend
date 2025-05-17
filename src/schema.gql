@@ -1,0 +1,65 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type UserOutput {
+  id: ID!
+  gamerTag: String!
+  email: String!
+  favoriteGames: [String!]!
+  platforms: [String!]!
+  genres: [String!]!
+  country: String!
+  available: Boolean!
+  hasMic: Boolean!
+  showGamerTag: Boolean!
+  photos: [String!]!
+}
+
+type GameOutput {
+  id: ID!
+  name: String!
+  genre: String
+  platforms: [String!]
+  coverUrl: String
+  developer: String
+  releaseYear: Float
+}
+
+type Query {
+  healthCheck: String!
+  getUserByEmail(input: FindUserByEmailInput!): UserOutput!
+  getAllGames: [GameOutput!]!
+}
+
+input FindUserByEmailInput {
+  email: String!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): UserOutput!
+  createGame(input: CreateGameInput!): GameOutput!
+}
+
+input CreateUserInput {
+  gamerTag: String!
+  email: String!
+  password: String!
+  favoriteGames: [String!]
+  platforms: [String!]
+  genres: [String!]
+  country: String
+  available: Boolean
+  hasMic: Boolean
+  showGamerTag: Boolean
+  photos: [String!]
+}
+
+input CreateGameInput {
+  name: String!
+  genre: String
+  platforms: [String!]
+  coverUrl: String
+  developer: String
+  releaseYear: Int
+}

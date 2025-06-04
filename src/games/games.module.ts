@@ -9,6 +9,10 @@ import { CreateGameUseCase } from './domain/services/create-game.usecase';
 import { FindAllGamesUseCase } from './domain/services/find-all-games.usecase';
 import { GameRepositoryImpl } from './infrastructure/database/game.repository.impl';
 import { GAME_REPOSITORY } from './domain/repositories/game.repository';
+import { FindGameByIdUseCase } from './domain/services/find-game-by-id.usecase';
+import { SearchGamesByNameUseCase } from './domain/services/search-games-by-name.usecase';
+import { UpdateGameUseCase } from './domain/services/update-game.usecase';
+import { DeleteGameUseCase } from './domain/services/delete-game.usecase';
 
 @Module({
   imports: [
@@ -18,11 +22,15 @@ import { GAME_REPOSITORY } from './domain/repositories/game.repository';
     GamesResolver,
     CreateGameUseCase,
     FindAllGamesUseCase,
+    FindGameByIdUseCase,
+    SearchGamesByNameUseCase,
+    UpdateGameUseCase,
+    DeleteGameUseCase,
     {
       provide: GAME_REPOSITORY,
       useClass: GameRepositoryImpl,
     },
   ],
-  exports: [],
+  exports: [GAME_REPOSITORY],
 })
 export class GamesModule {}

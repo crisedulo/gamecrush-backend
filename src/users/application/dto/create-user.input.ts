@@ -6,6 +6,7 @@ import {
   IsBoolean,
   IsArray,
   IsUrl,
+  IsIn,
   MinLength,
 } from 'class-validator';
 
@@ -31,12 +32,29 @@ export class CreateUserInput {
   @Field(() => [String], { nullable: true })
   @IsOptional()
   @IsArray()
+  @IsIn(['PC', 'PS5', 'XBOX', 'SWITCH', 'MOBILE'], { each: true })
   platforms?: string[];
 
   @Field(() => [String], { nullable: true })
   @IsOptional()
   @IsArray()
   genres?: string[];
+
+  @Field({ nullable: true })
+  @IsOptional()
+  @IsIn(['Casual', 'Competitivo', 'Cooperativo'])
+  styleOfPlay?: string;
+
+  @Field(() => [String], { nullable: true })
+  @IsOptional()
+  @IsArray()
+  @IsIn(['Manana', 'Tarde', 'Noche', 'Fines de semana'], { each: true })
+  availability?: string[];
+
+  @Field(() => [String], { nullable: true })
+  @IsOptional()
+  @IsArray()
+  languages?: string[];
 
   @Field({ nullable: true })
   @IsOptional()
@@ -57,6 +75,10 @@ export class CreateUserInput {
   @IsOptional()
   @IsBoolean()
   showGamerTag?: boolean;
+
+  @Field()
+  @IsBoolean()
+  termsAccepted: boolean;
 
   @Field(() => [String], { nullable: true })
   @IsOptional()

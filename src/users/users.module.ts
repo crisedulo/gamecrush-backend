@@ -9,10 +9,12 @@ import {
 } from './infrastructure/database/schemas/user.schema';
 import { UserRepositoryImpl } from './infrastructure/database/user.repository.impl';
 import { USER_REPOSITORY } from './domain/repositories/user.repository';
+import { GamesModule } from '../games/games.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    GamesModule,
   ],
   providers: [
     UsersResolver,

@@ -6,4 +6,12 @@ export interface IGameRepository {
   create(game: Partial<GameEntity>): Promise<GameEntity>;
 
   findAll(): Promise<GameEntity[]>;
+
+  findById(id: string): Promise<GameEntity | null>;
+
+  searchByName(name: string): Promise<GameEntity[]>;
+
+  update(id: string, data: Partial<GameEntity>): Promise<GameEntity | null>;
+
+  delete(id: string): Promise<boolean>;
 }

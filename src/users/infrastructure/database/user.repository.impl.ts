@@ -21,4 +21,9 @@ export class UserRepositoryImpl implements IUserRepository {
     if (!doc) return null;
     return UserMapper.toEntity(doc);
   }
+
+  async findByGamerTag(gamerTag: string): Promise<UserEntity | null> {
+    const doc = await this.model.findOne({ gamerTag });
+    return doc ? UserMapper.toEntity(doc) : null;
+  }
 }

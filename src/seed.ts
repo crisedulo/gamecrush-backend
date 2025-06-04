@@ -1,6 +1,12 @@
 import { connect, connection, model } from 'mongoose';
-import { Game, GameSchema } from './games/infrastructure/database/schemas/game.schema';
-import { User, UserSchema } from './users/infrastructure/database/schemas/user.schema';
+import {
+  Game,
+  GameSchema,
+} from './games/infrastructure/database/schemas/game.schema';
+import {
+  User,
+  UserSchema,
+} from './users/infrastructure/database/schemas/user.schema';
 import { randomBytes, scryptSync } from 'crypto';
 
 async function run() {

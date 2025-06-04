@@ -1,5 +1,8 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { GAME_REPOSITORY, IGameRepository } from '../repositories/game.repository';
+import {
+  GAME_REPOSITORY,
+  IGameRepository,
+} from '../repositories/game.repository';
 
 @Injectable()
 export class DeleteGameUseCase {

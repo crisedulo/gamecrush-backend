@@ -10,7 +10,10 @@ import {
   USER_REPOSITORY,
 } from '../repositories/user.repository';
 import { UserEntity } from '../entities/user.entity';
-import { GAME_REPOSITORY, IGameRepository } from '../../../games/domain/repositories/game.repository';
+import {
+  GAME_REPOSITORY,
+  IGameRepository,
+} from '../../../games/domain/repositories/game.repository';
 import { scryptSync, randomBytes } from 'crypto';
 
 @Injectable()
@@ -38,7 +41,9 @@ export class CreateUserUseCase {
       if (games.length !== data.favoriteGames.length) {
         const found = games.map((g) => g.name);
         const missing = data.favoriteGames.filter((n) => !found.includes(n));
-        throw new NotFoundException(`Juego no encontrado: ${missing.join(', ')}`);
+        throw new NotFoundException(
+          `Juego no encontrado: ${missing.join(', ')}`,
+        );
       }
       favoriteGameIds = games.map((g) => g.id);
     }

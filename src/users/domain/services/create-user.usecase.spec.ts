@@ -1,8 +1,14 @@
 import { ConflictException, NotFoundException } from '@nestjs/common';
 import { CreateUserUseCase } from './create-user.usecase';
 import { CreateUserInput } from '../../application/dto/create-user.input';
-import { USER_REPOSITORY, IUserRepository } from '../repositories/user.repository';
-import { GAME_REPOSITORY, IGameRepository } from '../../../games/domain/repositories/game.repository';
+import {
+  USER_REPOSITORY,
+  IUserRepository,
+} from '../repositories/user.repository';
+import {
+  GAME_REPOSITORY,
+  IGameRepository,
+} from '../../../games/domain/repositories/game.repository';
 
 const baseInput: CreateUserInput = {
   gamerTag: 'Player1',
@@ -48,7 +54,9 @@ describe('CreateUserUseCase', () => {
   it('should create user with hashed password', async () => {
     userRepo.findByEmail.mockResolvedValue(null);
     userRepo.findByGamerTag.mockResolvedValue(null);
-    gameRepo.findByNames.mockResolvedValue([{ id: '1', name: 'Valorant' }] as any);
+    gameRepo.findByNames.mockResolvedValue([
+      { id: '1', name: 'Valorant' },
+    ] as any);
     userRepo.create.mockImplementation(async (u) => u as any);
 
     const result = await useCase.execute({ ...baseInput });
@@ -59,19 +67,25 @@ describe('CreateUserUseCase', () => {
 
   it('should throw when email exists', async () => {
     userRepo.findByEmail.mockResolvedValue({} as any);
-    await expect(useCase.execute({ ...baseInput })).rejects.toBeInstanceOf(ConflictException);
+    await expect(useCase.execute({ ...baseInput })).rejects.toBeInstanceOf(
+      ConflictException,
+    );
   });
 
   it('should throw when gamerTag exists', async () => {
     userRepo.findByEmail.mockResolvedValue(null);
     userRepo.findByGamerTag.mockResolvedValue({} as any);
-    await expect(useCase.execute({ ...baseInput })).rejects.toBeInstanceOf(ConflictException);
+    await expect(useCase.execute({ ...baseInput })).rejects.toBeInstanceOf(
+      ConflictException,
+    );
   });
 
   it('should throw when game does not exist', async () => {
     userRepo.findByEmail.mockResolvedValue(null);
     userRepo.findByGamerTag.mockResolvedValue(null);
     gameRepo.findByNames.mockResolvedValue([]);
-    await expect(useCase.execute({ ...baseInput })).rejects.toBeInstanceOf(NotFoundException);
+    await expect(useCase.execute({ ...baseInput })).rejects.toBeInstanceOf(
+      NotFoundException,
+    );
   });
 });

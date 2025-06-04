@@ -25,7 +25,10 @@ export class CreateGameInput {
   @IsOptional()
   @IsArray({ message: 'platforms debe ser un arreglo' })
   @ArrayNotEmpty({ message: 'Debe especificar al menos una plataforma' })
-  @IsString({ each: true, message: 'Cada plataforma debe ser una cadena de texto' })
+  @IsString({
+    each: true,
+    message: 'Cada plataforma debe ser una cadena de texto',
+  })
   platforms?: string[];
 
   @Field({ nullable: true })
@@ -42,6 +45,8 @@ export class CreateGameInput {
   @IsOptional()
   @IsInt({ message: 'El año de lanzamiento debe ser un número entero' })
   @Min(1970, { message: 'El año de lanzamiento no puede ser menor a 1970' })
-  @Max(new Date().getFullYear() + 5, { message: 'El año de lanzamiento es demasiado alto' }) // opcional: límites razonables
+  @Max(new Date().getFullYear() + 5, {
+    message: 'El año de lanzamiento es demasiado alto',
+  }) // opcional: límites razonables
   releaseYear?: number;
 }

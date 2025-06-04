@@ -11,6 +11,8 @@ export interface IGameRepository {
 
   searchByName(name: string): Promise<GameEntity[]>;
 
+  findByNames(names: string[]): Promise<GameEntity[]>;
+
   update(id: string, data: Partial<GameEntity>): Promise<GameEntity | null>;
 
   delete(id: string): Promise<boolean>;

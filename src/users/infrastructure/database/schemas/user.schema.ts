@@ -35,6 +35,18 @@ export class User {
 
   @Prop({ type: [String], default: [] })
   photos: string[]; // URLs
+
+  @Prop({ default: 'Casual' })
+  styleOfPlay: string;
+
+  @Prop({ type: [String], default: [] })
+  availability: string[];
+
+  @Prop({ type: [String], default: [] })
+  languages: string[];
+
+  @Prop({ default: false })
+  termsAccepted: boolean;
 }
 
 export type UserDocument = User & Document;

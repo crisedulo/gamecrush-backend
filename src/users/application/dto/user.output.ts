@@ -20,4 +20,9 @@ export class UserOutput {
   @Field() showGamerTag: boolean;
 
   @Field(() => [String]) photos: string[];
+
+  @Field() styleOfPlay: string;
+  @Field(() => [String]) availability: string[];
+  @Field(() => [String]) languages: string[];
+  @Field() termsAccepted: boolean;
 }

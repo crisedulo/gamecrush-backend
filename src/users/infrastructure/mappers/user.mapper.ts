@@ -19,6 +19,10 @@ export class UserMapper {
       doc.hasMic,
       doc.showGamerTag,
       doc.photos,
+      doc.styleOfPlay,
+      doc.availability,
+      doc.languages,
+      doc.termsAccepted,
     );
   }
 
@@ -38,6 +42,10 @@ export class UserMapper {
       hasMic: entity.hasMic ?? false,
       showGamerTag: entity.showGamerTag ?? true,
       photos: entity.photos ?? [],
+      styleOfPlay: entity.styleOfPlay ?? 'Casual',
+      availability: entity.availability ?? [],
+      languages: entity.languages ?? [],
+      termsAccepted: entity.termsAccepted ?? false,
     };
   }
 }

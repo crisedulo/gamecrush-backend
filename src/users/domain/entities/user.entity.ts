@@ -12,5 +12,9 @@ export class UserEntity {
     public readonly hasMic: boolean = false,
     public readonly showGamerTag: boolean = true,
     public readonly photos: string[] = [],
+    public readonly styleOfPlay: string = 'Casual',
+    public readonly availability: string[] = [],
+    public readonly languages: string[] = [],
+    public readonly termsAccepted: boolean = false,
   ) {}
 }

@@ -69,6 +69,22 @@ export class GameRepositoryImpl implements IGameRepository {
     );
   }
 
+  async findByNames(names: string[]): Promise<GameEntity[]> {
+    const games = await this.model.find({ name: { $in: names } });
+    return games.map(
+      (g) =>
+        new GameEntity(
+          (g._id as any).toString(),
+          g.name,
+          g.genre,
+          g.platforms,
+          g.coverUrl,
+          g.developer,
+          g.releaseYear,
+        ),
+    );
+  }
+
   async update(id: string, data: Partial<GameEntity>): Promise<GameEntity | null> {
     const updated = await this.model.findByIdAndUpdate(id, data, { new: true });
     if (!updated) return null;

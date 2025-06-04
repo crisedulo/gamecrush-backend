@@ -32,19 +32,25 @@ export class CreateUserUseCase {
       throw new ConflictException('El GamerTag ya está registrado');
     }
 
+    let favoriteGameIds: string[] = [];
     if (data.favoriteGames?.length) {
-      for (const id of data.favoriteGames) {
-        const exists = await this.gameRepository.findById(id);
-        if (!exists) {
-          throw new NotFoundException(`Juego no encontrado: ${id}`);
-        }
+      const games = await this.gameRepository.findByNames(data.favoriteGames);
+      if (games.length !== data.favoriteGames.length) {
+        const found = games.map((g) => g.name);
+        const missing = data.favoriteGames.filter((n) => !found.includes(n));
+        throw new NotFoundException(`Juego no encontrado: ${missing.join(', ')}`);
       }
+      favoriteGameIds = games.map((g) => g.id);
     }
 
     const salt = randomBytes(8).toString('hex');
     const hash = scryptSync(data.password, salt, 32).toString('hex');
     const hashed = `${salt}.${hash}`;
 
-    return this.userRepository.create({ ...data, password: hashed });
+    return this.userRepository.create({
+      ...data,
+      favoriteGames: favoriteGameIds,
+      password: hashed,
+    });
   }
 }

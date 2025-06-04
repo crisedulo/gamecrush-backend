@@ -27,6 +27,7 @@ export class CreateUserInput {
   @Field(() => [String], { nullable: true })
   @IsOptional()
   @IsArray()
+  @IsString({ each: true })
   favoriteGames?: string[];
 
   @Field(() => [String], { nullable: true })

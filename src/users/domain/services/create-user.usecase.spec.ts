@@ -8,7 +8,7 @@ const baseInput: CreateUserInput = {
   gamerTag: 'Player1',
   email: 'test@example.com',
   password: 'secret',
-  favoriteGames: ['1'],
+  favoriteGames: ['Valorant'],
   platforms: ['PC'],
   genres: [],
   country: 'GT',
@@ -36,8 +36,8 @@ describe('CreateUserUseCase', () => {
     gameRepo = {
       create: jest.fn(),
       findAll: jest.fn(),
-      findById: jest.fn(),
       searchByName: jest.fn(),
+      findByNames: jest.fn(),
       update: jest.fn(),
       delete: jest.fn(),
     } as any;
@@ -48,11 +48,12 @@ describe('CreateUserUseCase', () => {
   it('should create user with hashed password', async () => {
     userRepo.findByEmail.mockResolvedValue(null);
     userRepo.findByGamerTag.mockResolvedValue(null);
-    gameRepo.findById.mockResolvedValue({ id: '1', name: 'Game' } as any);
+    gameRepo.findByNames.mockResolvedValue([{ id: '1', name: 'Valorant' }] as any);
     userRepo.create.mockImplementation(async (u) => u as any);
 
     const result = await useCase.execute({ ...baseInput });
     expect(result.password).not.toBe(baseInput.password);
+    expect(result.favoriteGames).toEqual(['1']);
     expect(userRepo.create).toHaveBeenCalled();
   });
 
@@ -70,7 +71,7 @@ describe('CreateUserUseCase', () => {
   it('should throw when game does not exist', async () => {
     userRepo.findByEmail.mockResolvedValue(null);
     userRepo.findByGamerTag.mockResolvedValue(null);
-    gameRepo.findById.mockResolvedValue(null);
+    gameRepo.findByNames.mockResolvedValue([]);
     await expect(useCase.execute({ ...baseInput })).rejects.toBeInstanceOf(NotFoundException);
   });
 });

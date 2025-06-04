@@ -8,6 +8,7 @@ describe('SearchGamesByNameUseCase', () => {
       findAll: jest.fn(),
       findById: jest.fn(),
       searchByName: jest.fn().mockResolvedValue([{ id: '1', name: 'Game' }] as any),
+      findByNames: jest.fn(),
       update: jest.fn(),
       delete: jest.fn(),
     } as any;

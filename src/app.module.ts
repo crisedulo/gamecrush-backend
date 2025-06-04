@@ -8,7 +8,7 @@ import { join } from 'path';
 
 // Módulos funcionales
 import { UsersModule } from './users/users.module';
-// import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './auth/auth.module';
 // import { MatchesModule } from './matches/matches.module';
 import { GamesModule } from './games/games.module';
 // import { ChatsModule } from './chats/chats.module';
@@ -46,7 +46,7 @@ import { validationSchema } from './config/validation';
 
     // Importa tus módulos funcionales
     UsersModule,
-    // AuthModule,
+    AuthModule,
     // MatchesModule,
     GamesModule,
     // ChatsModule,

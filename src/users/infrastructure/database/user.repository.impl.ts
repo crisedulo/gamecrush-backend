@@ -26,4 +26,21 @@ export class UserRepositoryImpl implements IUserRepository {
     const doc = await this.model.findOne({ gamerTag });
     return doc ? UserMapper.toEntity(doc) : null;
   }
+
+  async findById(id: string): Promise<UserEntity | null> {
+    const doc = await this.model.findById(id);
+    return doc ? UserMapper.toEntity(doc) : null;
+  }
+
+  async update(
+    id: string,
+    data: Partial<UserEntity>,
+  ): Promise<UserEntity | null> {
+    const updated = await this.model.findByIdAndUpdate(
+      id,
+      UserMapper.toPersistence(data),
+      { new: true },
+    );
+    return updated ? UserMapper.toEntity(updated) : null;
+  }
 }

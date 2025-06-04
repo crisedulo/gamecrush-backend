@@ -2,12 +2,12 @@ import { Resolver, Mutation, Args, Query, ID } from '@nestjs/graphql';
 import { CreateGameInput } from '../application/dto/create-game.input';
 import { UpdateGameInput } from '../application/dto/update-game.input';
 import { GameOutput } from '../application/dto/game.output';
-import { CreateGameUseCase } from '../domain/services/create-game.usecase';
-import { FindAllGamesUseCase } from '../domain/services/find-all-games.usecase';
-import { FindGameByIdUseCase } from '../domain/services/find-game-by-id.usecase';
-import { SearchGamesByNameUseCase } from '../domain/services/search-games-by-name.usecase';
-import { UpdateGameUseCase } from '../domain/services/update-game.usecase';
-import { DeleteGameUseCase } from '../domain/services/delete-game.usecase';
+import { CreateGameUseCase } from '../domain/use-cases/create-game.usecase';
+import { FindAllGamesUseCase } from '../domain/use-cases/find-all-games.usecase';
+import { FindGameByIdUseCase } from '../domain/use-cases/find-game-by-id.usecase';
+import { SearchGamesByNameUseCase } from '../domain/use-cases/search-games-by-name.usecase';
+import { UpdateGameUseCase } from '../domain/use-cases/update-game.usecase';
+import { DeleteGameUseCase } from '../domain/use-cases/delete-game.usecase';
 
 @Resolver(() => GameOutput)
 export class GamesResolver {

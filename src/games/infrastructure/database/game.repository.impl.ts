@@ -85,7 +85,10 @@ export class GameRepositoryImpl implements IGameRepository {
     );
   }
 
-  async update(id: string, data: Partial<GameEntity>): Promise<GameEntity | null> {
+  async update(
+    id: string,
+    data: Partial<GameEntity>,
+  ): Promise<GameEntity | null> {
     const updated = await this.model.findByIdAndUpdate(id, data, { new: true });
     if (!updated) return null;
     return new GameEntity(

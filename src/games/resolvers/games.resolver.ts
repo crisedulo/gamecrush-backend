@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query, ID } from '@nestjs/graphql';
 import { CreateGameInput } from '../application/dto/create-game.input';
 import { UpdateGameInput } from '../application/dto/update-game.input';
 import { GameOutput } from '../application/dto/game.output';
@@ -55,8 +55,11 @@ export class GamesResolver {
   }
 
   @Mutation(() => GameOutput)
-  async updateGame(@Args('input') input: UpdateGameInput): Promise<GameOutput> {
-    const game = await this.updateGameUseCase.execute(input);
+  async updateGame(
+    @Args('id', { type: () => ID }) id: string,
+    @Args('input') input: UpdateGameInput,
+  ): Promise<GameOutput> {
+    const game = await this.updateGameUseCase.execute(id, input);
     return { ...game };
   }
 

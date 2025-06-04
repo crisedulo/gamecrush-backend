@@ -1,5 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { GAME_REPOSITORY, IGameRepository } from '../repositories/game.repository';
+import {
+  GAME_REPOSITORY,
+  IGameRepository,
+} from '../repositories/game.repository';
 import { GameEntity } from '../entities/game.entity';
 
 @Injectable()

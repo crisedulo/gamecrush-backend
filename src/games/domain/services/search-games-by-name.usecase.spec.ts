@@ -1,5 +1,8 @@
 import { SearchGamesByNameUseCase } from './search-games-by-name.usecase';
-import { GAME_REPOSITORY, IGameRepository } from '../repositories/game.repository';
+import {
+  GAME_REPOSITORY,
+  IGameRepository,
+} from '../repositories/game.repository';
 
 describe('SearchGamesByNameUseCase', () => {
   it('returns games from repository', async () => {
@@ -7,7 +10,9 @@ describe('SearchGamesByNameUseCase', () => {
       create: jest.fn(),
       findAll: jest.fn(),
       findById: jest.fn(),
-      searchByName: jest.fn().mockResolvedValue([{ id: '1', name: 'Game' }] as any),
+      searchByName: jest
+        .fn()
+        .mockResolvedValue([{ id: '1', name: 'Game' }] as any),
       findByNames: jest.fn(),
       update: jest.fn(),
       delete: jest.fn(),

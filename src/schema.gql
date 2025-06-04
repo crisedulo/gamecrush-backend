@@ -14,6 +14,10 @@ type UserOutput {
   hasMic: Boolean!
   showGamerTag: Boolean!
   photos: [String!]!
+  styleOfPlay: String!
+  availability: [String!]!
+  languages: [String!]!
+  termsAccepted: Boolean!
 }
 
 type GameOutput {
@@ -30,6 +34,8 @@ type Query {
   healthCheck: String!
   getUserByEmail(input: FindUserByEmailInput!): UserOutput!
   getAllGames: [GameOutput!]!
+  getGameById(id: String!): GameOutput!
+  searchGamesByName(name: String!): [GameOutput!]!
 }
 
 input FindUserByEmailInput {
@@ -39,6 +45,8 @@ input FindUserByEmailInput {
 type Mutation {
   createUser(input: CreateUserInput!): UserOutput!
   createGame(input: CreateGameInput!): GameOutput!
+  updateGame(id: ID!, input: UpdateGameInput!): GameOutput!
+  deleteGame(id: String!): Boolean!
 }
 
 input CreateUserInput {
@@ -48,15 +56,28 @@ input CreateUserInput {
   favoriteGames: [String!]
   platforms: [String!]
   genres: [String!]
+  styleOfPlay: String
+  availability: [String!]
+  languages: [String!]
   country: String
   available: Boolean
   hasMic: Boolean
   showGamerTag: Boolean
+  termsAccepted: Boolean!
   photos: [String!]
 }
 
 input CreateGameInput {
   name: String!
+  genre: String
+  platforms: [String!]
+  coverUrl: String
+  developer: String
+  releaseYear: Int
+}
+
+input UpdateGameInput {
+  name: String
   genre: String
   platforms: [String!]
   coverUrl: String
